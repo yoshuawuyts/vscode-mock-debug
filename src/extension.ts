@@ -24,14 +24,18 @@ import { platform } from 'process';
 import { ProviderResult } from 'vscode';
 import { MockDebugSession } from './mockDebug';
 import { activateMockDebug, workspaceFileAccessor } from './activateMockDebug';
+import { pipeline } from 'stream';
+var tee = require('tee');
 
 /*
  * The compile time flag 'runMode' controls how the debug adapter is run.
  * Please note: the test suite only supports 'external' mode.
  */
-const runMode: 'external' | 'server' | 'namedPipeServer' | 'inline' = 'inline';
+const runMode: 'external' | 'server' | 'namedPipeServer' | 'inline' = 'server';
 
 export function activate(context: vscode.ExtensionContext) {
+
+	console.log(`running in mode: {}`, runMode);
 
 	// debug adapters can be run in different ways by using a vscode.DebugAdapterDescriptorFactory:
 	switch (runMode) {
@@ -99,7 +103,13 @@ class MockDebugAdapterServerDescriptorFactory implements vscode.DebugAdapterDesc
 			this.server = Net.createServer(socket => {
 				const session = new MockDebugSession(workspaceFileAccessor);
 				session.setRunAsServer(true);
-				session.start(socket as NodeJS.ReadableStream, socket);
+				// let reader = pipeline(socket, tee(process.stdout), (err) => {
+				// 	if (err) { console.error(err) } else { console.info('success!') }
+				// });
+				let writer = pipeline(tee(process.stdout), socket, (err) => {
+					if (err) { console.error(err) } else { console.info('success!') }
+				});
+				session.start(socket as NodeJS.ReadableStream, writer as NodeJS.WritableStream);
 			}).listen(0);
 		}
 

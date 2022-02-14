@@ -61,7 +61,8 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.4.4",
     "url": "^0.11.0",
-    "vsce": "^2.6.3"
+    "vsce": "^2.6.7",
+    "yarn": "^1.22.17"
   },
   "main": "./dist/extension.js",
   "browser": "./dist/web-extension.js",
@@ -205,5 +206,9 @@
         }
       }
     ]
+  },
+  "dependencies": {
+    "duplexify": "^4.1.2",
+    "tee": "^0.2.0"
   }
 }
