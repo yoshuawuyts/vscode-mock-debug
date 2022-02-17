@@ -24,8 +24,9 @@ import { platform } from 'process';
 import { ProviderResult } from 'vscode';
 import { MockDebugSession } from './mockDebug';
 import { activateMockDebug, workspaceFileAccessor } from './activateMockDebug';
-import { pipeline } from 'stream';
-var tee = require('tee');
+import { Writable, Transform, pipeline } from 'stream';
+import { createWriteStream } from 'fs';
+var path = require('path');
 
 /*
  * The compile time flag 'runMode' controls how the debug adapter is run.
@@ -100,16 +101,40 @@ class MockDebugAdapterServerDescriptorFactory implements vscode.DebugAdapterDesc
 
 		if (!this.server) {
 			// start listening on a random port
+
 			this.server = Net.createServer(socket => {
 				const session = new MockDebugSession(workspaceFileAccessor);
 				session.setRunAsServer(true);
-				// let reader = pipeline(socket, tee(process.stdout), (err) => {
-				// 	if (err) { console.error(err) } else { console.info('success!') }
-				// });
-				let writer = pipeline(tee(process.stdout), socket, (err) => {
-					if (err) { console.error(err) } else { console.info('success!') }
+
+				function fmt_date(date: Date) {
+					let millis = date.getMilliseconds();
+					let secs = date.getSeconds();
+					let hours = date.getHours();
+					`${hours}:${secs}:${millis}`
+				}
+
+				let base = "D:\\Code\\vscode-mock-debug";
+				let incoming = createWriteStream(path.join(base, "incoming.log"));
+				let outgoing = createWriteStream(path.join(base, "outgoing.log"));
+
+				let reader = pipeline(socket, new Transform({
+					transform(chunk, encoding, cb) {
+						incoming.write(`\n\n${fmt_date(new Date())} ${chunk}`);
+						cb(null, chunk);
+					}
+				}), (err) => { if (err !== null) { console.error(err) } });
+
+				const writer = new Writable({
+					write(chunk, encoding, callback) {
+						outgoing.write(`\n\n${fmt_date(new Date())} ${chunk}`);
+						socket._write(chunk, encoding, callback);
+					},
+					destroy() {
+						writer.destroy();
+					}
 				});
-				session.start(socket as NodeJS.ReadableStream, writer as NodeJS.WritableStream);
+
+				session.start(reader, writer);
 			}).listen(0);
 		}
 

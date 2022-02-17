@@ -1891,6 +1891,11 @@
   dependencies:
     "through" "~1.1.1"
 
+"teex@^1.0.0":
+  "integrity" "sha512-PJgqnNGSFdMUrag8oO50Wv0MxtKerYf+uA0G6mC/6//CDK9MjWnZuOFaqd9Wk//0P5AfiqwvXMDRMYIAbkWk9A=="
+  "resolved" "https://registry.npmjs.org/teex/-/teex-1.0.0.tgz"
+  "version" "1.0.0"
+
 "text-table@^0.2.0":
   "integrity" "sha1-f17oI66AUgfACvLfSoTsP8+lcLQ="
   "resolved" "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz"

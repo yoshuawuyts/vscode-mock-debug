@@ -1,0 +1,57 @@
+
+
+undefined Content-Length: 1108
+
+{"seq":1,"type":"response","request_seq":1,"command":"initialize","success":true,"body":{"supportsConfigurationDoneRequest":true,"supportsEvaluateForHovers":true,"supportsStepBack":true,"supportsDataBreakpoints":true,"supportsCompletionsRequest":true,"completionTriggerCharacters":[".","["],"supportsCancelRequest":true,"supportsBreakpointLocationsRequest":true,"supportsStepInTargetsRequest":true,"supportsExceptionFilterOptions":true,"exceptionBreakpointFilters":[{"filter":"namedException","label":"Named Exception","description":"Break on named exceptions. Enter the exception's name as the Condition.","default":false,"supportsCondition":true,"conditionDescription":"Enter the exception's name"},{"filter":"otherExceptions","label":"Other Exceptions","description":"This is a other exception","default":true,"supportsCondition":false}],"supportsExceptionInfoRequest":true,"supportsSetVariable":true,"supportsSetExpression":true,"supportsDisassembleRequest":true,"supportsSteppingGranularity":true,"supportsInstructionBreakpoints":true,"supportsReadMemoryRequest":true,"supportsWriteMemoryRequest":true}}
+
+undefined Content-Length: 46
+
+{"seq":2,"type":"event","event":"initialized"}
+
+undefined Content-Length: 115
+
+{"seq":3,"type":"response","request_seq":3,"command":"setDataBreakpoints","success":true,"body":{"breakpoints":[]}}
+
+undefined Content-Length: 122
+
+{"seq":4,"type":"response","request_seq":4,"command":"setInstructionBreakpoints","success":true,"body":{"breakpoints":[]}}
+
+undefined Content-Length: 94
+
+{"seq":5,"type":"response","request_seq":5,"command":"setExceptionBreakpoints","success":true}
+
+undefined Content-Length: 88
+
+{"seq":6,"type":"response","request_seq":6,"command":"configurationDone","success":true}
+
+undefined Content-Length: 77
+
+{"seq":7,"type":"response","request_seq":2,"command":"launch","success":true}
+
+undefined Content-Length: 126
+
+{"seq":8,"type":"response","request_seq":7,"command":"threads","success":true,"body":{"threads":[{"id":1,"name":"thread 1"}]}}
+
+undefined Content-Length: 85
+
+{"seq":9,"type":"event","event":"stopped","body":{"reason":"exception","threadId":1}}
+
+undefined Content-Length: 127
+
+{"seq":10,"type":"response","request_seq":8,"command":"threads","success":true,"body":{"threads":[{"id":1,"name":"thread 1"}]}}
+
+undefined Content-Length: 1799
+
+{"seq":11,"type":"response","request_seq":9,"command":"stackTrace","success":true,"body":{"stackFrames":[{"id":0,"source":{"name":"d:\\Code\\vscode-mock-debug\\readme.md","path":"d:\\Code\\vscode-mock-debug\\readme.md","sourceReference":0,"adapterData":"mock-adapter-data"},"line":6,"column":0,"name":"It(0)"},{"id":1,"source":{"name":"d:\\Code\\vscode-mock-debug\\readme.md","path":"d:\\Code\\vscode-mock-debug\\readme.md","sourceReference":0,"adapterData":"mock-adapter-data"},"line":6,"column":0,"name":"supports(1)"},{"id":2,"source":{"name":"d:\\Code\\vscode-mock-debug\\readme.md","path":"d:\\Code\\vscode-mock-debug\\readme.md","sourceReference":0,"adapterData":"mock-adapter-data"},"line":6,"column":0,"name":"step(2)"},{"id":3,"source":{"name":"d:\\Code\\vscode-mock-debug\\readme.md","path":"d:\\Code\\vscode-mock-debug\\readme.md","sourceReference":0,"adapterData":"mock-adapter-data"},"line":6,"column":0,"name":"continue(3)"},{"id":4,"source":{"name":"d:\\Code\\vscode-mock-debug\\readme.md","path":"d:\\Code\\vscode-mock-debug\\readme.md","sourceReference":0,"adapterData":"mock-adapter-data"},"line":6,"column":0,"name":"breakpoints(4)"},{"id":5,"source":{"name":"d:\\Code\\vscode-mock-debug\\readme.md","path":"d:\\Code\\vscode-mock-debug\\readme.md","sourceReference":0,"adapterData":"mock-adapter-data"},"line":6,"column":0,"name":"exceptions(5)"},{"id":6,"source":{"name":"d:\\Code\\vscode-mock-debug\\readme.md","path":"d:\\Code\\vscode-mock-debug\\readme.md","sourceReference":0,"adapterData":"mock-adapter-data"},"line":6,"column":0,"name":"and(6)"},{"id":7,"source":{"name":"d:\\Code\\vscode-mock-debug\\readme.md","path":"d:\\Code\\vscode-mock-debug\\readme.md","sourceReference":0,"adapterData":"mock-adapter-data"},"line":6,"column":0,"name":"BOTTOM(7)"}],"totalFrames":8}}
+
+undefined Content-Length: 370
+
+{"seq":12,"type":"response","request_seq":10,"command":"exceptionInfo","success":true,"body":{"exceptionId":"Exception ID","description":"This is a descriptive description of the exception.","breakMode":"always","details":{"message":"Message contained in the exception.","typeName":"Short type name of the exception object","stackTrace":"stack frame 1\nstack frame 2"}}}
+
+undefined Content-Length: 223
+
+{"seq":13,"type":"response","request_seq":11,"command":"scopes","success":true,"body":{"scopes":[{"name":"Locals","variablesReference":1000,"expensive":false},{"name":"Globals","variablesReference":1001,"expensive":true}]}}
+
+undefined Content-Length: 106
+
+{"seq":14,"type":"response","request_seq":12,"command":"variables","success":true,"body":{"variables":[]}}
